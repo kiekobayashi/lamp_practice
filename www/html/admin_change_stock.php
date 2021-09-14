@@ -25,7 +25,6 @@ $token = get_post('token');
 if (is_valid_csrf_token($token) === false) {
   set_error('トークンが不正です');
   redirect_to(ADMIN_URL);
-  exit();
 }
 
 if(update_item_stock($db, $item_id, $stock)){
