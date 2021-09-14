@@ -19,7 +19,6 @@ $token = get_post('token');
 if (is_valid_csrf_token($token) === false) {
   set_error('トークンが不正です');
   redirect_to(CART_URL);
-  exit();
 }
 
 $carts = get_user_carts($db, $user['user_id']);

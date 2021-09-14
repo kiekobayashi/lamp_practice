@@ -29,7 +29,6 @@ $image = get_file('image');
 if (is_valid_csrf_token($token) === false) {
   set_error('トークンが不正です');
   redirect_to(ADMIN_URL);
-  exit();
 }
 
 if(regist_item($db, $name, $price, $stock, $status, $image)){
