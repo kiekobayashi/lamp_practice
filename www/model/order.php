@@ -25,30 +25,6 @@ function get_orders($db, $user_id){
     return fetch_all_query($db, $sql, $params);
   }
 
-  function get_order($db, $user_id, $order_id){
-    $sql = "
-      SELECT
-        orders.order_id,
-        orders.created,
-        SUM(order_details.price * order_details.amount) AS total
-      FROM
-        orders
-      JOIN
-        order_details
-      ON
-        orders.order_id = order_details.order_id
-      WHERE
-        orders.user_id = :user_id
-      AND
-        orders.order_id = :order_id
-      GROUP BY
-        orders.order_id
-    ";
-    $params = array(':user_id' => $user_id, ':order_id' => $order_id);
-    return fetch_all_query($db, $sql, $params);
-  }
-
-
   function get_admin_orders($db){
     $sql = "
       SELECT
@@ -91,10 +67,11 @@ function get_orders($db, $user_id){
     return fetch_all_query($db, $sql, $params);
   }
 
-  function get_admin_order($db, $order_id){
+  function get_order($db, $order_id){
     $sql = "
       SELECT
         orders.order_id,
+        orders.user_id,
         orders.created,
         SUM(order_details.price * order_details.amount) AS total
       FROM
@@ -109,5 +86,5 @@ function get_orders($db, $user_id){
         orders.order_id
     ";
     $params = array(':order_id' => $order_id);
-    return fetch_all_query($db, $sql, $params);
+    return fetch_query($db, $sql, $params);
   }

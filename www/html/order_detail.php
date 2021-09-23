@@ -17,10 +17,17 @@ $user = get_login_user($db);
 
 $order_id = get_post('order_id');
 
-if(is_admin($user) === false){
-  $orders = get_order($db, $user['user_id'], $order_id);
-} else {
-  $orders = get_admin_order($db, $order_id);
+// ユーザーは識別せずに読み込み
+$order = get_order($db, $order_id);
+
+if (empty($order) === true){
+  set_message('このページは表示できません');
+  redirect_to(ORDER_URL);
+}
+// ユーザーが不正の場合リダイレクト
+if(is_admin($user) === false && $order['user_id'] !== $user['user_id']){
+  set_message('このページは表示できません');
+  redirect_to(ORDER_URL); 
 }
 
 $order_details = get_order_detail($db, $order_id);

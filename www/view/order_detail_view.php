@@ -22,13 +22,11 @@
           </tr>
         </thead>
         <tbody>
-          <?php foreach($orders as $order){ ?>
           <tr>
             <td><?php print ($order['order_id']); ?></td>
             <td><?php print ($order['created']); ?></td>
             <td><?php print ($order['total']); ?>円</td>
           </tr>
-          <?php } ?> 
         </tbody>
       </table>
 
