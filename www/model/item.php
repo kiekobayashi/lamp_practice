@@ -143,6 +143,27 @@ function delete_item($db, $item_id){
   return execute_query($db, $sql, $params);
 }
 
+function get_ranking($db){
+  $sql = "
+    SELECT 
+      items.item_id,
+      items.name,
+      items.image
+    FROM   
+      order_details
+    JOIN   
+      items
+    ON     
+      order_details.item_id = items.item_id
+    GROUP BY
+      item_id
+    ORDER BY
+      SUM(order_details.amount) desc
+    LIMIT 3
+  ";
+  return fetch_all_query($db, $sql);
+}
+
 
 // 非DB
 

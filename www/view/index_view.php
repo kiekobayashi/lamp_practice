@@ -41,6 +41,28 @@
         </div>
       <?php } ?>
       </div>
+      <div class="ranking mt-5">
+        <h2>人気ランキング</h2>
+        <table class="table table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th>1位</th>
+              <th>2位</th>
+              <th>3位</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <?php foreach($rankings as $ranking){ ?>
+              <td>
+                <?php print $ranking['name']; ?>
+                <img class="card-img" src="<?php print(IMAGE_PATH . $ranking['image']); ?>">
+              </td>
+              <?php } ?>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   
